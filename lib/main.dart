@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_ui_animations_flutter/screens/home_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'core/bloc/bloc.dart';
 
-const Color primaryRed = Color(0xFFD62828);
+
+const Color primaryRed = Color(0xFFC1121F);
 const Color accentOrange = Color(0xFFF77F00);
-const Color warmBackground = Color(0xFFFFF8F0);
+const Color warmBackground = Color(0xFFF3F4F6);
 const Color darkText = Color(0xFF2D2D2D);
 const Color secondaryText = Color(0xFF777777);
 const Color ratingGold = Color(0xFFFFB000);
@@ -32,13 +35,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: '',
-      theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+    return BlocProvider(
+      create: (BuildContext context){
+        return BlocFile();
+      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: '',
+        theme: ThemeData(
+          colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        ),
+        home: HomeScreen(),
       ),
-      home: HomeScreen(),
     );
   }
 }
