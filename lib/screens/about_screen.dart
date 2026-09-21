@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 import '../main.dart';
+import 'home_screen.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
@@ -17,6 +18,7 @@ class _AboutScreenState extends State<AboutScreen> with TickerProviderStateMixin
 
   late AnimationController con1;
   late AnimationController con2;
+  late AnimationController con3;
 
   @override
   void initState() {
@@ -36,12 +38,20 @@ class _AboutScreenState extends State<AboutScreen> with TickerProviderStateMixin
     con2.forward();
 
 
+    con3=AnimationController(vsync: this,
+        duration: Duration(milliseconds:1500)
+    );
+
+    con3.repeat();
+
+
   }
 
   @override
   void dispose() {
     con1.dispose();
     con2.dispose();
+    con3.dispose();
     super.dispose();
   }
 
@@ -52,6 +62,59 @@ class _AboutScreenState extends State<AboutScreen> with TickerProviderStateMixin
         appBar: AppBar(backgroundColor: warmBackground,leading: IconButton(onPressed: (){
           Navigator.pop(context);
         }, icon:Icon(Icons.arrow_circle_left_outlined,color: secondaryText,)),
+          actions: [
+            Padding(
+              padding:EdgeInsets.all(12.w),
+              child: ScaleTransition(
+
+                scale: Tween<double>(
+                  end: 1,
+                  begin: 0.70
+                ).animate(con3),
+                child: IconButton(onPressed: (){
+
+
+                  showDialog(context: context, builder: (context){
+                    return AlertDialog(
+                      backgroundColor: warmBackground,
+                      title: Center(
+                        child: Text("Are You Sure To Logout?",style: TextStyle(color: Colors.black,
+                            fontWeight: FontWeight.bold
+                        ),),
+                      ),
+
+                      content: Icon(Icons.logout,color: primaryRed,size: 200.sp,),
+
+                      actionsAlignment: MainAxisAlignment.center,
+                      actions: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: primaryRed
+                                  ),
+                                  onPressed: (){
+                                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>HomeScreen()), (route) => true,);}, child: Text("Yes", style: TextStyle(
+                                  color: Colors.white
+                              ),)),
+                            ),
+                          ],
+                        )
+                      ],
+                    );
+                  });
+
+
+                },
+                
+                  icon: Icon(Icons.logout,color: primaryRed,size: 35.sp,),
+                  
+                ),
+              ),
+            )
+          ],
         ),
         body: Padding(
           padding: EdgeInsets.fromLTRB(16.w,0,16.w,8.w),
@@ -66,7 +129,7 @@ class _AboutScreenState extends State<AboutScreen> with TickerProviderStateMixin
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
 
-                      Text("Your Cart",style: TextStyle(fontStyle: FontStyle.italic,color:darkText,fontWeight: FontWeight.bold,fontSize: 25.sp),),
+                      Text("About App",style: TextStyle(fontStyle: FontStyle.italic,color:darkText,fontWeight: FontWeight.bold,fontSize: 25.sp),),
 
                       SizedBox(height: 16.h,),
 
@@ -219,6 +282,11 @@ class _AboutScreenState extends State<AboutScreen> with TickerProviderStateMixin
             ),
           ),
         ),
+
+
+
+
+
     );
   }
 }

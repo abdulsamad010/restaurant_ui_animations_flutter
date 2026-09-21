@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     return Scaffold(
       appBar: AppBar(
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.only(bottomRight: Radius.circular(45.r),bottomLeft: Radius.circular(45.r))),
-        leading: Icon(Icons.fastfood,color: primaryRed,),
+
         backgroundColor: warmBackground,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -72,9 +72,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
             TextButton(onPressed: (){}, child: Text("Islamabad",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
 
-
-
-            Icon(Icons.arrow_drop_down_outlined,color: Colors.black,),
 
             SizedBox(width: 4.w,),
 
@@ -184,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   SizedBox(height: 16.h,),
 
                   AnimatedOpacity(
-                    duration: Duration(seconds: 3),
+                    duration: Duration(seconds: 5),
                     opacity:state.opicity,
                     curve: Curves.easeInOut,
                     child: Stack(
@@ -395,7 +392,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       bottomNavigationBar: BottomNavigationBar(items: [
         BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home"),
         BottomNavigationBarItem(icon: Icon(Icons.shopping_cart),label: "Cart"),
-        BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
+        BottomNavigationBarItem(icon: Icon(Icons.person),label: "About"),
       ],
 
         backgroundColor: warmBackground,
@@ -417,6 +414,155 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         },
 
       ),
+
+
+      drawer: Drawer(
+
+        backgroundColor: warmBackground,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(16.w,32.w,16.w,16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+
+              Center(
+                child: CircleAvatar(
+                  backgroundColor: lightRed,
+                  radius: 64.r,
+                  child: FadeTransition(
+                      opacity: con1,
+                      child: Icon(Icons.person,color: primaryRed,size:60.sp)),
+                ),
+              ),
+
+
+              SizedBox(height: 16.h,),
+
+              Center(
+                child: Text("Abdul Samad",style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.sp
+                ),),
+              ),
+
+              SizedBox(height: 2.h,),
+
+              Center(
+                child: SizeTransition(
+                  axis: Axis.horizontal,
+                  axisAlignment: BorderSide.strokeAlignInside,
+                  sizeFactor: con1,
+                  child: Text("abdulsamadabbasi010@gmail.com",style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13.sp,
+                    color: secondaryText
+                  ),),
+                ),
+              ),
+
+              SizedBox(height: 16.h,),
+
+              Divider(),
+
+              SizedBox(height: 16.h,),
+
+
+
+
+              ListTile(
+                title: Text("Home",style: TextStyle(fontSize: 15.sp,color: Colors.black,
+                    fontWeight: FontWeight.bold
+                ),),
+                onTap: (){
+                  Navigator.pop(context);
+                  },
+                leading: Icon(Icons.home),
+              ),
+
+              ListTile(
+                title: Text("My Cart",style: TextStyle(fontSize: 15.sp,color: Colors.black,
+                    fontWeight: FontWeight.bold
+                ),),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+                },
+                leading: Icon(Icons.shopping_cart),
+              ),
+
+
+
+              ListTile(
+                title: Text("About App",style: TextStyle(fontSize: 15.sp,color: Colors.black,
+                    fontWeight: FontWeight.bold
+                ),),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AboutScreen()));
+                },
+                leading: Icon(Icons.person),
+              ),
+
+
+              Expanded(child: SizedBox()),
+
+              Center(
+                child: ScaleTransition(
+
+                  scale: Tween<double>(
+                      end: 1,
+                      begin: 0.7
+                  ).animate(con1),
+                  child: ElevatedButton(onPressed: (){
+
+
+                    showDialog(context: context, builder: (context){
+                      return AlertDialog(
+                        backgroundColor: warmBackground,
+                        title: Center(
+                          child: Text("Are You Sure To Logout?",style: TextStyle(color: Colors.black,
+                              fontWeight: FontWeight.bold
+                          ),),
+                        ),
+
+                        content: Icon(Icons.logout,color: primaryRed,size: 200.sp,),
+
+                        actionsAlignment: MainAxisAlignment.center,
+                        actions: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: primaryRed
+                                    ),
+                                    onPressed: (){
+                                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>HomeScreen()), (route) => true,);}, child: Text("Yes", style: TextStyle(
+                                    color: Colors.white
+                                ),)),
+                              ),
+                            ],
+                          )
+                        ],
+                      );
+                    });
+
+
+                  },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: primaryRed
+                      ),
+                      child: Text("Logout",style: TextStyle(color: Colors.white),)),
+                ),
+              ),
+
+
+            ],
+
+          ),
+        ),
+
+      ),
+
 
     );
   }

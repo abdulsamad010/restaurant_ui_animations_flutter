@@ -33,14 +33,13 @@ class CartCard extends StatelessWidget {
             children: [
               Text("$title",style: TextStyle(color:darkText,fontWeight: FontWeight.bold,fontSize: 18.sp),),
 
+
               Text("$description",style: TextStyle(color:secondaryText,fontWeight: FontWeight.bold,fontSize: 7.sp),),
 
 
 
 
-
-
-                    Row(
+              Row(
                       children: [
                         Container(
                           padding: EdgeInsets.fromLTRB(8.w,0,8.w,0),
@@ -64,7 +63,7 @@ class CartCard extends StatelessWidget {
                             child: Text("Fresh & Tasty",textAlign: TextAlign.center,style: TextStyle(color:successGreen,fontWeight: FontWeight.bold,fontSize: 10.sp),)),
 
 
-                        SizedBox(width: 55.w,),
+                        SizedBox(width: 40.w,),
 
                         IconButton(onPressed: (){
 
